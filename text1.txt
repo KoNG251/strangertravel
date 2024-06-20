@@ -1,0 +1,8 @@
+:logo-primary="'{{ asset('assets/favicon.ico') }}'"
+            :logout-route="'{{ route('logout_self') }}'"
+            :index-route="'{{ route('index') }}'"
+            :csrf-token="'{{ csrf_token() }}'"
+            :room-array="'{{ $roomString }}'"
+            :add-hotel-route="'{{ route('manager.add') }}'"
+            :store-update-route="'{{ route('manager.store.update.room') }}'"
+            :update-route="'{{ route('manager.update') }}'"

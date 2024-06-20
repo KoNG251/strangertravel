@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --primary-100: #2C5D9E;
+    --primary-200: #628acf;
+    --primary-300: #c9ecff;
+    --accent-100: #4AA0D5;
+    --accent-200: #004774;
+    --text-100: #FFFFFF;
+    --text-200: #e0e0e0;
+    --bg-100: #0B1E3F;
+    --bg-200: #1e2d50;
+    --bg-300: #38456a;
+}
+
+*{
+    font-family: 'Kanit', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* navbar */
+
+.nav{
+    position: relative;
+    margin-top: 10px;
+    height: 65px;
+    z-index: 5;
+
+    & nav{
+        width: 100%;
+        border-bottom: 1px solid #e1e1e1;
+        margin-bottom: 5rem;
+    }
+
+}
+
+.nav-picture{
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+
+    & .bg-text {
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0, 0.4);
+        color: white;
+        font-weight: bold;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        padding: 5rem;
+    }
+}
+
+.box-search{
+    width: 80%;
+    height: 150px;
+    margin-top: -4.5rem;
+    position: relative;
+    z-index: 3;
+
+    & .bg-blue{
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        filter: blur(1px);
+        -webkit-filter: blur(1px);
+        opacity: 70%;
+    }
+
+    & .search{
+
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 20px;
+
+        & .button-search{
+            width: 55px;
+            height: 55px;
+            background-color: #0B1E3F;
+        }
+
+        & .button-search:hover{
+            background-color: #004774;
+        }
+
+
+    }
+
+    & .search-input{
+        width: 100%;
+        background: none;
+        border-left: none;
+        border-top: none;
+        border-right: none;
+        border-bottom: 2px solid black;
+
+    }
+
+    & .search-input::placeholder{
+        color: #000;
+        font-size: 1rem;
+    }
+
+}
+
+
+/* hotel grid */
+.box-hotel{
+    width: 100%;
+    height: auto;
+}
+
+.box-picture{
+    width: 100%;
+    height: 291px;
+    background-color: var(--bg-100);
+    background-size: cover;
+    background-position: center;
+}
+
+.box-hotel .hotel-title{
+    margin-top: 1rem;
+}
+
+.hotel-sub{
+    color: var(--bg-300);
+}
+
+/* login modal */
+.modalLogin{
+    display: none;
+    position: fixed;
+    width: 600px;
+    height: 800px;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+}
+
+.input-login{
+    width: 100%;
+    height: 52px;
+    border: 1px solid #0B1E3F;
+}
+
+.input-login:focus{
+    border: 1px solid #0B1E3F;
+}
+
+.danger{
+    width: 100%;
+    height: 52px;
+    color: #fff;
+    background-color: #dc3545;
+    border: #bd192a;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 10px;
+}
+
+@media screen and (max-width: 711px) {
+    .box-search{
+        height: 250px;
+    }
+}
