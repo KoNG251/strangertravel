@@ -69,6 +69,7 @@ Route::prefix('chat')->name('chat.')->group(function () {
     Route::get('/api/get/group',[chatController::class,'getGroup'])->name('api.group');
     Route::post('/api/join/group',[chatController::class,'joinGroup'])->name('api.join.group');
     Route::post('/api/leave/group',[chatController::class,'leaveGroup'])->name('api.leave.group');
+    Route::get('/api/badword',[chatController::class,'escapeBadWord']);
 });
 
 // booking

@@ -103,34 +103,55 @@ class chatController extends Controller
             'group_id' => 'required'
         ]);
 
-        $message = Message::create([
-            'sender_id' => $request->input('sender_id'),
-            'body' => $request->input('message'),
-            'group_id' => $request->input('group_id'),
-            'type' => 'text'
-        ]);
+        function escapeBadWord($message){
 
-        $joinedData = DB::table('messages')
-        ->join('users','users.id','=','messages.sender_id')
-        ->where('messages.id', $message->id)
-        ->select('messages.*', 'users.fname', 'users.lname','users.userPicturePath')
-        ->first();
+            $filePath = 'assets/text/badword.txt';
+            $badWords = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            [
-                'cluster' => env('PUSHER_APP_CLUSTER'),
-                'useTLS' => true,
-            ]
-        );
+            $pattern = '/' . implode('|', $badWords) . '+/u';
 
-        $pusher->trigger('group-chat-channel-' . $request->input('group_id'), 'new-message', $joinedData);
+            $match = preg_match($pattern, $message) ? TRUE : FALSE;
 
-        return response()->json([
-            'message' => 'send message success'
-        ]);
+            return $match;
+
+        }
+
+        if(!escapeBadWord($request->message)){
+
+            $message = Message::create([
+                'sender_id' => $request->input('sender_id'),
+                'body' => $request->input('message'),
+                'group_id' => $request->input('group_id'),
+                'type' => 'text'
+            ]);
+
+            $joinedData = DB::table('messages')
+            ->join('users','users.id','=','messages.sender_id')
+            ->where('messages.id', $message->id)
+            ->select('messages.*', 'users.fname', 'users.lname','users.userPicturePath')
+            ->first();
+
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+                env('PUSHER_APP_SECRET'),
+                env('PUSHER_APP_ID'),
+                [
+                    'cluster' => env('PUSHER_APP_CLUSTER'),
+                    'useTLS' => true,
+                ]
+            );
+
+            $pusher->trigger('group-chat-channel-' . $request->input('group_id'), 'new-message', $joinedData);
+
+            return response()->json([
+                'message' => 'send message success'
+            ]);
+
+        }else{
+            return response()->json([
+                'message' => 'You have a bad word in your message'
+            ],500);
+        }
     }
 
     function joinGroup(Request $request) {
@@ -169,5 +190,15 @@ class chatController extends Controller
 
     }
 
+    function escapeBadWord(){
+        $filePath = 'assets/text/badword.txt';
+        $badWords = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+        $pattern = '/' . implode('|', $badWords) . '+/u';
+
+        return response()->json([
+            "word" => $pattern
+        ]);
+    }
 
 }

@@ -41,6 +41,10 @@ class userController extends Controller
                 'url' => route('index')
             ]);
 
+        }else{
+            return response()->json([
+                'message' => 'Invalid password'
+            ],500);
         }
 
     }

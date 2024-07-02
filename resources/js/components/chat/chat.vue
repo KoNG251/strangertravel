@@ -201,10 +201,14 @@
                                 }
                             }
                         ).then(response => {
-                            console.log(response.data)
                             this.message = ''
                             this.scrollToBottom()
-                        })
+                        }).catch(error => {
+                            Notiflix.Notify.failure(
+                                error.response.data.message
+                            )
+                            this.message = ''
+                        });
                     }
                 },
                 createGroup(){

@@ -103,7 +103,7 @@
                         }
                     ).then(response => {
                         Notiflix.Report.success(
-                            'Notiflix Success',
+                            'Success',
                              response.data.message,
                             'Okay',
                             () => {
@@ -112,12 +112,9 @@
                         );
                     }).catch(error => {
                         Notiflix.Report.failure(
-                            'Notiflix Success',
+                            'Failed to login',
                              error.response.data.message,
-                            'Okay',
-                            () => {
-                                window.location.href = response.data.url
-                            }
+                            'Okay'
                         );
                     })
                 }
