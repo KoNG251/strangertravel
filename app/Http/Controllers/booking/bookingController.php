@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use OmiseCharge;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Booking as BookingMail;
 
 define('OMISE_PUBLIC_KEY', env('OMISE_PUBLIC_KEY',false));
 define('OMISE_SECRET_KEY', env('OMISE_SECRET_KEY',false));
@@ -138,7 +140,16 @@ class bookingController extends Controller
 
                 DB::commit();
 
-                return response()->json(['message' => 'Payment successful'], 200);
+                $email = booking::select('email')
+                ->where('id', '=', $bookingID)
+                ->first();
+
+
+                Mail::to($email->email)->send(new BookingMail($bookingID));
+
+
+                return response()->json(['message' => 'Payment successful',], 200);
+
             } else {
                 DB::rollBack();
                 return response()->json(['error' => 'Payment failed'], 400);
