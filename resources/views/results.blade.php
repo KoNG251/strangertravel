@@ -7,7 +7,7 @@
         @vite('resources/js/app.js')
         <link rel="stylesheet" href="{{asset('fontawesome-free-6.5.1-web/css/all.min.css')}}">
         <link rel="icon" href="{{ asset('assets/favicon.ico') }}" type="image/x-icon">
-        <link rel="stylesheet" href="{{ asset('assets/css/calculate.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/results.css') }}">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <title>StrangerTravel</title>
         <style>
@@ -21,10 +21,14 @@
     <body class="flex flex-col min-h-screen">
         @include('sweetalert::alert')
         <div id="app">
-            <calculate
+            <result
             :background="'{{ asset('assets/media/illustrations/dozzy-1/14-dark.png') }}'"
+            :image1="'{{ asset('assets/media/illustrations/sketchy-1/5-dark.png') }}'"
+            :image2="'{{ asset('assets/media/illustrations/sketchy-1/13.png') }}'"
+            :image3="'{{ asset('assets/media/illustrations/sketchy-1/6-dark.png') }}'"
+            :picture-hotel-route="'{{ asset('storage/hotelPicture/') }}'"
             :csrf-token="'{{ csrf_token() }}'"
-            ></calculate>
+            ></result>
         </div>
     </body>
 </html>

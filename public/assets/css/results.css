@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --primary-100: #2C5D9E;
+    --primary-200: #628acf;
+    --primary-300: #c9ecff;
+    --accent-100: #4AA0D5;
+    --accent-200: #004774;
+    --text-100: #FFFFFF;
+    --text-200: #e0e0e0;
+    --bg-100: #0B1E3F;
+    --bg-200: #1e2d50;
+    --bg-300: #38456a;
+}
+
+*{
+    font-family: 'Kanit', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.display{
+    width: 782px;
+}
+
+.card-info{
+    width: 250px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 32px;
+    background-size: 110px 110px;
+
+    & .card-image{
+        width: 110px;
+    }
+
+}
+
+.card{
+    border-radius: 10px;
+    width: 100%;
+    height: 550px;
+    padding: 20px;
+    background-color: white;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.box-info{
+    height: 250px !important;
+    background-color: #004774;
+}
+
+@media screen and (max-width: 768px) {
+
+    .display{
+
+        width: 100%;
+        padding: 10%;
+
+        & .card-info{
+            width: 100%;
+        }
+
+    }
+
+    .box-info{
+        height: 250px !important;
+    }
+
+}

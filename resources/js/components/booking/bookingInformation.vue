@@ -96,7 +96,7 @@
                         <label for="tel" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-1 z-10 origin-[0] bg-white peer-focus:px-2 peer-focus:text-blue-950 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-3 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Phone number</label>
                     </div>
                 </div>
-                <button class="btnSubmit p-2 w-28 rounded-lg text-white">Confirm</button>
+                <button class="mt-5 btnSubmit p-2 w-28 rounded-lg text-white">Confirm</button>
             </form>
 
             <form class="col-start-1 col-end-13 border rounded-lg block md:hidden p-4" @submit.prevent="confirmInfo">
@@ -122,7 +122,7 @@
                         <label for="tel" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-1 z-10 origin-[0] bg-white peer-focus:px-2 peer-focus:text-blue-950 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-3 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Phone number</label>
                     </div>
                 </div>
-                <button class="btnSubmit p-2 w-28 rounded-lg text-white">Confirm</button>
+                <button class="mt-5 btnSubmit p-2 w-28 rounded-lg text-white">Confirm</button>
             </form>
 
         </div>

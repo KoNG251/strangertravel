@@ -41,6 +41,8 @@ Route::get('/view/register',[userController::class,'viewRegister'])->name('viewr
 Route::post('/auth/login/checkdata',[userController::class,'login'])->name('login_self');
 Route::post('/auth/logout/self',[userController::class,'userLogout'])->name('logout_self');
 Route::post('/auth/register/store',[userController::class,'register'])->name('register_self');
+Route::post('/calculate/api/results',[calculateController::class,'calculate']);
+Route::get('/calculate/results',[calculateController::class,'viewResults']);
 
 // facebook
 // Route::get('auth/facebook', [FacebookController::class,'redirectToFacebook'])->name('auth.facebook');

@@ -27,6 +27,9 @@ app.component('login',login)
 import Calculate from './components/calculate.vue';
 app.component('calculate',Calculate)
 
+import calculateResult from './components/results.vue';
+app.component('result',calculateResult);
+
 import Footer from './components/footer.vue'
 app.component('index-footer',Footer)
 // manager
