@@ -38,21 +38,7 @@
 <body >
 
     <div class="background">
-        @php
-            function dateFormat($date) {
-                $format = date_create($date);
-                return date_format($format,'d M Y');
-            }
-        @endphp
-        <h1 style="text-align: center;" class="text-white">Thank you.</h1>
-        <h3 class="text-white">Your booking details are as follows:</h3>
-        <p class="text-white"><span style="font-weight:500;">Hotel name :</span> {{ $items['hotelName'] }}</p>
-        <div class="flex text-white">
-            <p>check-in {{ dateFormat($items['check_in']) }}</p>
-            <p style="margin-left: 15px">check-out {{ dateFormat($items['check_out']) }}</p>
-        </div>
-        <p class="text-white">price : {{ $items['price'] }}</p>
-        <p class="text-red">Please </p>
+        <a href="{{ route('reset_password',['id'=>$id_hash,'email'=>$email]) }}">clickhere</a>
     </div>
 
 </body>

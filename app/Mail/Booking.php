@@ -19,7 +19,6 @@ class Booking extends Mailable
      * Create a new message instance.
      */
 
-    public $booking;
     public $id;
 
     public function __construct($id)
@@ -30,12 +29,16 @@ class Booking extends Mailable
     public function build()
     {
 
-        $booking = bookingModel::where('id', $this->id)->get();
+        $booking = bookingModel::select('hotels.hotelName', 'bookings.fname', 'bookings.lname', 'bookings.check_in', 'bookings.check_out','rooms.price')
+        ->join('rooms', 'rooms.id', '=', 'bookings.roomId')
+        ->join('hotels', 'hotels.id', '=', 'rooms.hotelId')
+        ->where('bookings.id', '=', $this->id)
+        ->first();
 
-        return $this->subject('ขอบคุณที่จองโรงแรมจาก Stranger Travel')
+        return $this->subject('thank you for booking hotel with Stranger Travel')
                     ->view('emails.booking')
                     ->with([
-                        'booking' => $this->booking,
+                        'items' => $booking,
                     ]);
     }
 }

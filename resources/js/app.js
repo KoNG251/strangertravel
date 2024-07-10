@@ -30,8 +30,16 @@ app.component('calculate',Calculate)
 import calculateResult from './components/results.vue';
 app.component('result',calculateResult);
 
-import Footer from './components/footer.vue'
-app.component('index-footer',Footer)
+import rePassword from './components/repassword.vue';
+app.component('repassword',rePassword);
+
+import Reset from './components/reset.vue';
+app.component('reset',Reset);
+
+import Footer from './components/footer.vue';
+app.component('index-footer',Footer);
+
+
 // manager
 
 import managerIndex from './components/manager/index.vue'

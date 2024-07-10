@@ -12,46 +12,29 @@
 
                 <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 
-                    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST" enctype="multipart/form-data" ref="signin" @submit.prevent="submitForm">
+                    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST" enctype="multipart/form-data" ref="reset" @submit.prevent="submitForm">
 
                         <div class="text-center mb-10">
 
-                            <h1 class="text-dark mb-3">Sign In</h1>
-                            <div class="text-gray-400 fw-semibold fs-4">
-                                New Here?
-                                <a :href="registerRoute" class="link-primary fw-bold">Create an Account</a>
-                            </div>
+                            <h1 class="text-dark mb-3">Reset password!</h1>
 
                         </div>
 
 
                         <div class="fv-row mb-10">
-
-                            <label class="form-label fs-6 fw-bold text-dark" for="email">Email</label>
-
-
-                            <input class="form-control form-control-lg form-control-solid" id="email" type="text" name="email" autocomplete="off" />
-
-                        </div>
-
-
-                        <div class="fv-row mb-10">
-
-                            <div class="d-flex flex-stack mb-2">
-
-                                <label class="form-label fw-bold text-dark fs-6 mb-0" for="password">Password</label>
-
-                            </div>
-
-
+                            <input type="text" class="hidden" name="id" :value="id" readonly>
+                            <input type="text" class="hidden" name="email" :value="email" readonly>
+                            <label class="form-label fs-6 fw-bold text-dark" for="password">Password</label>
                             <input class="form-control form-control-lg form-control-solid" id="password" type="password" name="password" autocomplete="off" />
 
-                            <div class="w-full" style="text-align:end; margin-top: 14px">
-                                <a href="/auth/reset/passwords">forgot password?</a>
-                            </div>
-
                         </div>
 
+                        <div class="fv-row mb-10">
+
+                            <label class="form-label fs-6 fw-bold text-dark" for="password_confirm">Confirm password</label>
+                            <input class="form-control form-control-lg form-control-solid" id="password_confirm" type="password" name="password_confirmation" autocomplete="off" />
+
+                        </div>
 
                         <div class="text-center">
 
@@ -78,55 +61,45 @@
     import moment from 'moment';
     import axios from 'axios';
     import Notiflix from 'notiflix';
-    import Swal from 'sweetalert2'
-    import Echo from 'laravel-echo';
-    import Pusher from 'pusher-js';
 
         export default {
             data(){
 
-                return  {
+                const params = new URLSearchParams(window.location.search);
+                const email = params.get('email');
+                const id = params.get('id');
 
+                return  {
+                    id: id,
+                    email: email
                 }
             },
             props:{
                 logo: String,
                 background: String,
                 csrfToken: String,
-                registerRoute: String
             },
             methods: {
                 submitForm(){
-
                     Notiflix.Loading.pulse('Loading...');
 
-                    const formData = new FormData(this.$refs.signin);
+                    const formData = new FormData(this.$refs.reset);
 
-                    axios.post('/auth/login/checkdata',formData,
+                    axios.post('/auth/api/reset',formData,
                         {
                             headers: {
                                 'X-CSRF-TOKEN': this.csrfToken
                             }
                         }
                     ).then(response => {
-                        Notiflix.Report.success(
-                            'Success',
-                             response.data.message,
-                            'Okay',
-                            () => {
-                                window.location.href = response.data.url
-                            }
-                        );
-                    }).catch(error => {
-
                         Notiflix.Loading.remove();
-
-                        Notiflix.Report.failure(
-                            'Failed to login',
-                             error.response.data.message,
-                            'Okay'
-                        );
+                        Notiflix.Notify.success('Password reset successfully. You can now login with your new password.');
+                        window.location = '/view/login';
+                    }).catch(error => {
+                        Notiflix.Loading.remove();
+                        console.log(error)
                     })
+
                 }
             },
             watch: {

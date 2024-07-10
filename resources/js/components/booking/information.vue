@@ -223,15 +223,6 @@ export default {
         search(){
             window.location.href = this.indexRoute+'?place='+this.place
         },
-        getClass(index) {
-        const classes = [
-            'col-start-1 col-end-13 md:col-end-6 row-start-1 row-end-3 bg-black rounded-lg imageCover',
-            'hidden md:block col-start-6 col-end-10 row-start-1 row-end-3 bg-blue-800 rounded-lg',
-            'hidden md:block col-start-10 col-end-13 bg-slate-500 rounded-lg',
-            'hidden md:block col-start-10 col-end-13 bg-slate-500 rounded-lg'
-        ];
-            return classes[index] || '';
-        },
         getStyle(imageUrl, index) {
             const styles = {
                 backgroundImage: `url(${imageUrl})`,

@@ -10,6 +10,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RecoverPassword;
 
 class userController extends Controller
 {
@@ -266,6 +268,70 @@ class userController extends Controller
 
     public function viewRegister() {
         return view('register');
+    }
+
+    public function viewRePassword() {
+        return view('repassword');
+    }
+
+    public function viewReset(){
+        return view('reset');
+    }
+
+    public function rePassword(Request $request) {
+
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        $user = User::where('email',$request->input('email'))->first();
+
+        if($user == null){
+            return response()->json([
+                "message" => 'User not found'
+            ],500);
+        }
+
+        Mail::to($request->email)->send(new RecoverPassword($user->id,$user->email));
+
+        return response()->json([
+            "success"
+        ]);
+
+
+    }
+
+    public function resetPassword(Request $request) {
+
+        $request->validate([
+            'email' => 'required|email',
+            'id' => 'required',
+            'password' => 'required|confirmed|min:8'
+        ]);
+
+        $user = User::where('email',$request->input('email'))->first();
+
+        if($user == null){
+            return response()->json([
+                "message" => 'User not found'
+            ],500);
+        }
+
+        if(!Hash::check($user->id,$request->id)){
+            return response()->json([
+                "message" => 'Invalid Token'
+            ],500);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->input('password'))
+        ]);
+
+        return response()->json([
+            'message' => "Password reset successfully. You can now login with your new password.",
+            "url" => route('login')
+        ]);
+
     }
 
 

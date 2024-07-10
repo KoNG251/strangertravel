@@ -43,7 +43,12 @@ Route::post('/auth/logout/self',[userController::class,'userLogout'])->name('log
 Route::post('/auth/register/store',[userController::class,'register'])->name('register_self');
 Route::post('/calculate/api/results',[calculateController::class,'calculate']);
 Route::get('/calculate/results',[calculateController::class,'viewResults']);
+Route::get('/auth/reset/passwords',[userController::class,'viewRePassword']);
+Route::get('/auth/reset',[userController::class,'viewReset'])->name('reset_password');
+Route::post('/auth/api/reset',[userController::class,'resetPassword']);
 
+
+Route::post('/api/check/new/password',[userController::class,'rePassword']);
 // facebook
 // Route::get('auth/facebook', [FacebookController::class,'redirectToFacebook'])->name('auth.facebook');
 // Route::get('auth/facebook/callback', [FacebookController::class,'handleFacebookCallback']);

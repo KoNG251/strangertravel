@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Hash;
 
 class RecoverPassword extends Mailable
 {
@@ -16,38 +17,26 @@ class RecoverPassword extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $id;
+    public $email;
+
+    public function __construct($id,$email)
     {
-        //
+        $this->id = $id;
+        $this->email = $email;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'Recover Password',
-        );
-    }
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
+        $id_hash = Hash::make($this->id) ;
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
+        return $this->subject('Recover Password')
+                    ->view('emails.resetPassword')
+                    ->with([
+                        'id_hash' => $id_hash,
+                        'email' => $this->email
+        ]);
+
     }
 }

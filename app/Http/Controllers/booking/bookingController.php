@@ -94,7 +94,6 @@ class bookingController extends Controller
 
     }
 
-    // test
 
     public function processCreditPayment(Request $request) {
 
@@ -138,15 +137,11 @@ class bookingController extends Controller
                 $transaction->bookingID = $bookingID;
                 $transaction->save();
 
-                DB::commit();
-
-                $email = booking::select('email')
-                ->where('id', '=', $bookingID)
-                ->first();
-
+                $email = booking::where('id', '=', $bookingID)->first();
 
                 Mail::to($email->email)->send(new BookingMail($bookingID));
 
+                DB::commit();
 
                 return response()->json(['message' => 'Payment successful',], 200);
 
