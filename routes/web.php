@@ -47,7 +47,6 @@ Route::get('/auth/reset/passwords',[userController::class,'viewRePassword']);
 Route::get('/auth/reset',[userController::class,'viewReset'])->name('reset_password');
 Route::post('/auth/api/reset',[userController::class,'resetPassword']);
 
-
 Route::post('/api/check/new/password',[userController::class,'rePassword']);
 // facebook
 // Route::get('auth/facebook', [FacebookController::class,'redirectToFacebook'])->name('auth.facebook');
@@ -68,6 +67,9 @@ Route::get('/chat/{id?}',[chatController::class,'index'])->name('chat');
 
 // chat
 
+Route::get('/history/booking',[userController::class,'viewHistory'])->name('history');
+Route::get('/api/history/booking',[userController::class,'getHistory']);
+
 Route::prefix('chat')->name('chat.')->group(function () {
     Route::post('/create/group',[chatController::class,'createGroup'])->name('create');
     Route::get('/api/get/chatlist',[chatController::class,'getChat'])->name('api.chatlist');
@@ -77,6 +79,8 @@ Route::prefix('chat')->name('chat.')->group(function () {
     Route::post('/api/join/group',[chatController::class,'joinGroup'])->name('api.join.group');
     Route::post('/api/leave/group',[chatController::class,'leaveGroup'])->name('api.leave.group');
     Route::get('/api/badword',[chatController::class,'escapeBadWord']);
+    Route::post('/api/member',[chatController::class,'memberGroup']);
+    Route::post('/api/kick/member',[chatController::class,'kickMember']);
 });
 
 // booking

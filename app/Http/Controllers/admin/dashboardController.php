@@ -81,7 +81,7 @@ class dashboardController extends Controller
     }
 
     public function alluser() {
-        $user = User::paginate(20);
+        $user = User::paginate(10);
 
         return response()->json([
             'message' => $user

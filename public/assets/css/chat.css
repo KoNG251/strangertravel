@@ -20,113 +20,57 @@
     box-sizing: border-box;
 }
 
-.display{
-    width: 1480px;
-    height: 730px;
-    max-height: 730px;
+.nav-chat{
+    height: 130px;
+
+    .logo{
+        width: 150px;
+        height: 150px;
+    }
 }
 
-.chat-list{
-    height: 72px;
-    width: 100%;
+.link-btn{
+    background-color: var(--text-100);
+    padding: 3px 30px;
 }
 
-.profile-group{
-    height: 100%;
-    width: 54px;
-    background-size: cover;
-    background-position: center;
+.chat-grid{
+    height: 770px;
 }
 
-.chat-null{
-    font-size: 79px;
-}
-
-.chat-head{
-    height: 85px;
+.chat-list::-webkit-scrollbar{
+    display: none;
 }
 
 .chat-body{
-    height: 570px;
+    height: 630px;
+    overflow-y: scroll;
 }
 
-.chat-footer{
-    background: white;
-    height: 75px;
+.chat-body::-webkit-scrollbar{
+    display: none;
 }
 
-.message-input{
+.member-card{
     width: 100%;
+    height: 650px;
+    margin-bottom: 10px;
 }
 
-.message-input:focus{
-    border-color: var(--bg-100) !important;
+.member-card::-webkit-scrollbar{
+    display: none;
 }
 
-.message-sender{
-    width: 400px;
-    height: auto;
-}
-
-.message-receiver{
-    width: 400px;
-    height: auto;
-}
-
-.profile{
+.profile-group{
     background-size: cover;
     background-position: center;
 }
 
-
-@media only screen and (max-width: 425px) {
-    .display{
-        width: 100%;
-        height: auto;
-        max-height: auto;
-    }
-
-    .chat-left{
-        height: 380px;
-    }
-
-    .chat-right{
-        height: 580px;
-    }
-
-    .message-sender{
-        width: 250px;
-    }
-
-    .message-receiver{
-        width: 250px;
-    }
-
+.display{
+    background-color: #000000;
+    padding: 20px;
 }
 
-@media only screen and (max-width: 768px) {
-    .display{
-        width: 100%;
-        height: auto;
-        max-height: auto;
-    }
-
-    .chat-left{
-        height: 380px;
-    }
-
-    .chat-right{
-        height: 580px;
-    }
-
-    .message-sender{
-        width: 250px;
-    }
-
-    .message-receiver{
-        width: 250px;
-    }
-
+.black-drop{
+    background-color: #161616;
 }
-
-

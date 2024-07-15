@@ -78,8 +78,6 @@ class calculateController extends Controller
         ->groupBy('hotels.id', 'hotels.hotelName', 'hotels.province')
         ->get();
 
-
-
         return response()->json([
             'message' => [
                 'date' => [

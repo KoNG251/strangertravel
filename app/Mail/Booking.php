@@ -20,10 +20,12 @@ class Booking extends Mailable
      */
 
     public $id;
+    public $price;
 
-    public function __construct($id)
+    public function __construct($id,$price)
     {
         $this->id = $id;
+        $this->price = $price;
     }
 
     public function build()
@@ -39,6 +41,7 @@ class Booking extends Mailable
                     ->view('emails.booking')
                     ->with([
                         'items' => $booking,
+                        'price' => $this->price
                     ]);
     }
 }

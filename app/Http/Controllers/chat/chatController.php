@@ -200,4 +200,45 @@ class chatController extends Controller
         ]);
     }
 
+    function memberGroup(Request $request) {
+        $request->validate([
+            'id' => 'required'
+        ]);
+
+        $user = MemberGroup::
+        select('users.id','users.fname','users.lname','users.userPicturePath','member_groups.id as groupId')
+        ->join('users','users.id','=','member_groups.user_id')
+        ->where('group_id',$request->input('id'))->get();
+
+        return response()->json([
+            'message' => $user
+        ]);
+
+    }
+
+    function kickMember(Request $request) {
+
+        $request->validate([
+            'group_id' => 'required',
+            'member_id' => 'required'
+        ]);
+
+        $check_admin = Group::find($request->input('group_id'));
+
+        if($check_admin->create_id != session('user')){
+            return response()->json([
+                'message' => 'You are not allowed to kick members of this group'
+            ]);
+        }
+
+        $kick = MemberGroup::find($request->input('member_id'))->delete();
+
+        if($kick){
+            return response()->json([
+               'message' => "Remove this Member Successful"
+            ],200);
+        }
+
+    }
+
 }

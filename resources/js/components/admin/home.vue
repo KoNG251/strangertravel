@@ -270,7 +270,7 @@
                         <h1>All user</h1>
                     </div>
                     <div class="px-8 table-responsive">
-                        <table id="kt_file_manager_list" data-kt-filemanager-table="folders" class="table align-middle table-row-dashed fs-6 gy-5">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5" style="margin-bottom: 40px">
                             <thead>
                                 <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                     <th>#</th>
@@ -292,7 +292,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <ul :class="['pagination mb-3',{'d-none' : total == 1}]">
+                        <ul :class="['pagination mb-3',{'d-none' : total == 1}]" style="margin-top: 25px">
                             <li :class="['page-item previous cursor-pointer',{'disabled' : page == 1}]" @click="fetchUser(page-1)"><a class="page-link"><i class="previous"></i></a></li>
                             <li :class="['page-item cursor-pointer',{ 'active': number == page  }]" v-for="number in total" :key="number" @click="fetchUser(number)"><a class="page-link">{{ number }}</a></li>
                             <li :class="['page-item next cursor-pointer',{'disabled' : page == total}]" @click="fetchUser(page+1)"><a  class="page-link"><i class="next"></i></a></li>
@@ -402,6 +402,8 @@
             },
             async mounted() {
 
+                Notiflix.Loading.hourglass('Loading...');
+
                 await axios.get('/admin/api/get/info').then(response => {
                     this.user = response.data.message
                 })
@@ -429,6 +431,8 @@
                 await this.fetchUser(this.page)
 
                 this.renderDonutChart();
+
+                Notiflix.Loading.remove();
 
             }
         }

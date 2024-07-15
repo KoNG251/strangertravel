@@ -36,6 +36,9 @@ app.component('repassword',rePassword);
 import Reset from './components/reset.vue';
 app.component('reset',Reset);
 
+import History from './components/history.vue'
+app.component('history',History);
+
 import Footer from './components/footer.vue';
 app.component('index-footer',Footer);
 

@@ -51,7 +51,7 @@
             <p>check-in {{ dateFormat($items['check_in']) }}</p>
             <p style="margin-left: 15px">check-out {{ dateFormat($items['check_out']) }}</p>
         </div>
-        <p class="text-white">price : {{ $items['price'] }}</p>
+        <p class="text-white">price : {{ $price }}</p>
         <p class="text-red">Please </p>
     </div>
 

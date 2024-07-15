@@ -101,7 +101,7 @@
                         <i class="fi fi-rr-user"></i>
                         <p>{{ sumPeople(item.numberOfBed,item.bed_type) }} people</p>
                     </div>
-                    <input type="checkbox" :value="item.id" :id="'room'+item.id" class="hidden" @change="toggleSelection(item.id)">
+                    <input type="checkbox" :value="item.id" :id="'room'+item.id" class="hidden" name="hotel" @change="toggleSelection(item.id)">
                 </label>
             </div>
 

@@ -112,13 +112,18 @@ export default {
     },
     methods: {
         submitPayment() {
+
+            Notiflix.Loading.pulse('It may take 1 minute.');
+
             if (!this.cardNumber || !this.name || !this.cvvNumber || !this.expiration) {
+                Notiflix.Loading.remove();
                 Notiflix.Notify.failure('Please fill in all required fields.');
                 return;
             }
 
             const formattedExpiration = moment(this.expiration, 'MM/YY', true);
             if (!formattedExpiration.isValid()) {
+                Notiflix.Loading.remove();
                 Notiflix.Notify.failure('Please enter a valid expiration date (MM/YY).');
                 return;
             }
@@ -146,13 +151,27 @@ export default {
                             }
                         }
                     ).then(response => {
+                        Notiflix.Loading.remove();
                         Notiflix.Notify.success(response.data.message);
 
                         setTimeout(() => {
                              window.location.href = `${this.successRoute}`
                         }, 1925);
+                    }).catch(error => {
+
+                        Notiflix.Loading.remove();
+                        Notiflix.Report.failure(
+                            'Failure',
+                            'do not pay as the same booking',
+                            'Okay',
+                            () => {
+                                window.location.href = '/'
+                            }
+                        );
+
                     })
                 } else {
+                    Notiflix.Loading.remove();
                     Notiflix.Notify.failure('Payment tokenization failed. Please try again.');
                 }
             });

@@ -21,7 +21,7 @@ return new class extends Migration
         });
 
         Admin::create([
-            'email' => 'admin@strangertavel.com',
+            'email' => 'admin@strangertravel.com',
             'password' => Hash::make('11223344')
         ]);
 

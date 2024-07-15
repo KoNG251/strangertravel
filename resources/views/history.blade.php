@@ -54,7 +54,7 @@
 
 										<span class="menu-link menu-center">
 											<span class="menu-icon me-0">
-												<i class="ki-duotone ki-user fs-2x text-primary">
+												<i class="ki-duotone ki-user fs-2x">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </i>
@@ -95,7 +95,7 @@
 
 										<span class="menu-link menu-center">
 											<span class="menu-icon me-0">
-												<i class="ki-duotone ki-time fs-2x">
+												<i class="ki-duotone ki-time fs-2x text-primary">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </i>
@@ -122,7 +122,7 @@
                                                             <span class="path2"></span>
                                                         </i>
 													</span>
-													<span class="menu-title">History Booking</span>
+													<span class="menu-title">Booking history</span>
 												</a>
 
 											</div>
@@ -201,7 +201,7 @@
 									<div class="menu-item">
 
 										<div class="menu-content">
-											<span class="menu-section fs-5 fw-bold ps-1 py-1">Account</span>
+											<span class="menu-section fs-5 fw-bold ps-1 py-1">History</span>
 										</div>
 
 									</div>
@@ -212,7 +212,7 @@
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>
 											</span>
-											<span class="menu-title">Authentication</span>
+											<span class="menu-title">Booking history</span>
 										</a>
 
 									</div>
@@ -239,11 +239,10 @@
 
                 <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
                     <div id="app">
-                        <auth
-                        :send-email-route="'{{ route('auth.emailVerify') }}'"
-                        :send-phone-route="'{{ route('auth.sendOtp') }}'"
+                        <history
+
                         >
-                        </auth>
+                        </history>
                     </div>
                 </div>
 

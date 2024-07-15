@@ -114,7 +114,7 @@
                              error.response.data.message,
                             'Okay',
                             () => {
-                                window.location.href = response.data.url
+
                             }
                         );
                     })

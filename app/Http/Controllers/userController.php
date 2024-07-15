@@ -12,6 +12,9 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RecoverPassword;
+use App\Models\Booking;
+use App\Models\Hotel;
+use App\Models\Transaction;
 
 class userController extends Controller
 {
@@ -330,6 +333,26 @@ class userController extends Controller
         return response()->json([
             'message' => "Password reset successfully. You can now login with your new password.",
             "url" => route('login')
+        ]);
+
+    }
+
+    public function viewHistory() {
+        return view('history');
+    }
+
+    public function getHistory() {
+
+        $history = Transaction::select('bookings.id','hotels.hotelName','hotels.province','hotels.amphures','transactions.price','bookings.check_in','bookings.check_out')
+        ->leftJoin('bookings', 'bookings.id', '=', 'transactions.bookingID')
+        ->leftJoin('rooms', 'rooms.id', '=', 'bookings.roomId')
+        ->join('hotels', 'hotels.id', '=', 'rooms.hotelId')
+        ->where('transactions.user', session('user'))
+        ->get();
+
+
+        return response()->json([
+            'message' => $history
         ]);
 
     }

@@ -15,6 +15,7 @@ use OmiseCharge;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Booking as BookingMail;
 
+
 define('OMISE_PUBLIC_KEY', env('OMISE_PUBLIC_KEY',false));
 define('OMISE_SECRET_KEY', env('OMISE_SECRET_KEY',false));
 define('OMISE_API_VERSION', env('OMISE_API_VERSION',false));
@@ -112,6 +113,16 @@ class bookingController extends Controller
             $user = session('user');
         }
 
+        foreach($booking as $id){
+            $check = Booking::find($id);
+            if($check->status === 1 or $check->status === "1"){
+                return response()->json([
+                    'message' => 'You have made a repeat payment.'
+                ],500);
+                break;
+            }
+        }
+
         DB::beginTransaction();
 
         try {
@@ -129,17 +140,19 @@ class bookingController extends Controller
                     $find = Booking::find($data);
                     $find->status = 1;
                     $find->save();
+
+                    $room_price = Room::find($find->roomId);
+
+                    $transaction = new Transaction;
+                    $transaction->user = $user;
+                    $transaction->price = $room_price->price;
+                    $transaction->bookingID = $data;
+                    $transaction->save();
+
                 }
 
-                $transaction = new Transaction;
-                $transaction->user = $user;
-                $transaction->price = $price;
-                $transaction->bookingID = $bookingID;
-                $transaction->save();
-
                 $email = booking::where('id', '=', $bookingID)->first();
-
-                Mail::to($email->email)->send(new BookingMail($bookingID));
+                Mail::to($email->email)->send(new BookingMail($bookingID, $price));
 
                 DB::commit();
 

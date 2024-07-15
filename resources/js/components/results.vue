@@ -84,6 +84,9 @@ export default {
             return moment(date, "YYYY-MM-DD").format("YYYY MMMM DD");
         },
         results() {
+
+            Notiflix.Loading.pulse('Loading...');
+
             const startDate = moment(this.date.start).format("YYYY-MM-DD");
             const endDate = moment(this.date.end).format("YYYY-MM-DD");
             axios
@@ -105,8 +108,14 @@ export default {
                     this.room.forEach((item, index) => {
                         this.room[index].photos = item.photos.split(',');
                     });
+
+                    Notiflix.Loading.remove();
+
                 })
                 .catch((error) => {
+
+                    Notiflix.Loading.remove();
+        
                     Notiflix.Report.failure(
                         "Error",
                         error.response.data.message,
@@ -124,6 +133,7 @@ export default {
     watch: {},
     computed: {},
     mounted() {
+
         this.results();
     },
 };
