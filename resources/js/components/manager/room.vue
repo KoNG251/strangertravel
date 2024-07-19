@@ -281,6 +281,7 @@
                     this.rooms.pop(index);
                 },
                 storeRoom(){
+                    Notiflix.Loading.hourglass('Store room')
                     const queryString = window.location.search;
                     const urlParams = new URLSearchParams(queryString);
                     const id = urlParams.get('id')
@@ -297,7 +298,7 @@
                             }
                         }
                     ).then(response => {
-
+                        Notiflix.Loading.remove()
                         Notiflix.Report.success(
                             'ADD SUCCESS',
                             'you just add hotel successfully!',
@@ -308,7 +309,7 @@
                         )
 
                     }).catch(error => {
-                        console.log(error)
+                        Notiflix.Loading.remove()
                     })
                 },
 

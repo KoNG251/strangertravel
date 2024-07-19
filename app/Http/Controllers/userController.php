@@ -58,7 +58,10 @@ class userController extends Controller
     {
         alert()->success('Success!', 'Logout Successfully');
         Session::flush();
-        return redirect()->route('index');
+        return response()->json([
+            'message' => "logout success",
+            'url' => route('index')
+        ]);
     }
 
     public function register(Request $request){

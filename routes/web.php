@@ -7,7 +7,7 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\calculateController;
-use App\Http\Controllers\Auth\FacebookController;
+use App\Http\Controllers\Auth\oAuthController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Manager\addHotel;
 use App\Http\Controllers\booking\viewController;
@@ -48,12 +48,10 @@ Route::get('/auth/reset',[userController::class,'viewReset'])->name('reset_passw
 Route::post('/auth/api/reset',[userController::class,'resetPassword']);
 
 Route::post('/api/check/new/password',[userController::class,'rePassword']);
-// facebook
-// Route::get('auth/facebook', [FacebookController::class,'redirectToFacebook'])->name('auth.facebook');
-// Route::get('auth/facebook/callback', [FacebookController::class,'handleFacebookCallback']);
 
-//
-
+//Facebook
+Route::get('/auth/facebook/redirect',[oAuthController::class,'redirectFacebook']);
+Route::get('/auth/facebook/callback',[oAuthController::class,'callbackFacebook']);
 
 Route::get('/api/get/info',function() {
     $user = User::find(session('user'));

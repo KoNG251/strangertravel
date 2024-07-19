@@ -117,6 +117,10 @@ class ManagerController extends Controller
                 'url' => route('manager.cms.home')
             ]);
 
+        }else{
+            return response()->json([
+                "message" => "email or password wrong!!",
+            ],500);
         }
 
     }

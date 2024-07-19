@@ -65,6 +65,12 @@
 
                     </form>
 
+                    <div class="text-center">
+                        <button class="btn btn-lg btn-primary w-100 mb-5" @click="redirectToFacebook">
+                            <span class="indicator-label text-xl"><i class="fa-brands fa-square-facebook"></i> Facebook</span> 
+                        </button>
+                    </div>
+
                 </div>
 
             </div>
@@ -127,6 +133,9 @@
                             'Okay'
                         );
                     })
+                },
+                redirectToFacebook(){
+                    window.location.href = "/auth/facebook/redirect"
                 }
             },
             watch: {

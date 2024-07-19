@@ -96,6 +96,9 @@
             },
             methods: {
                 submitForm(){
+                    
+                    Notiflix.Loading.pulse("Loading...")
+
                     const formData = new FormData(this.$refs.signin);
 
                     axios.post('/manager/api/login',formData,
@@ -105,6 +108,7 @@
                             }
                         }
                     ).then(response => {
+                        Notiflix.Loading.remove()
                         Notiflix.Report.success(
                             'Notiflix Success',
                              response.data.message,
@@ -114,13 +118,11 @@
                             }
                         );
                     }).catch(error => {
+                        Notiflix.Loading.remove()
                         Notiflix.Report.failure(
                             'Notiflix Success',
                              error.response.data.message,
-                            'Okay',
-                            () => {
-                                window.location.href = response.data.url
-                            }
+                            'Okay'
                         );
                     })
                 }

@@ -302,6 +302,9 @@
                     this.nearList.splice(index, 1);
                 },
                 submitForm(){
+                    
+                    Notiflix.Loading.hourglass('May take 1 minute')
+                    
                     axios.post('/manager/api/store/details',
                         {
                             name: this.name,
@@ -319,12 +322,13 @@
                             }
                         }
                     ).then(response => {
+                        Notiflix.Loading.remove()
                         Notiflix.Notify.success('Add successfully');
                         setTimeout(() => {
                              window.location.href = `/manager/view/add/picture?id=${response.data.message.id}`
                         },200);
                     }).catch(error => {
-                        console.log(error)
+                        Notiflix.Loading.remove()
                         Notiflix.Report.failure(
                             'Error',
                             error.response.data.message,

@@ -230,6 +230,7 @@
                     });
                 },
                 submitFiles() {
+                    Notiflix.Loading.pulse('Loading...')
                     const formData = new FormData();
                     const queryString = window.location.search;
                     const urlParams = new URLSearchParams(queryString);
@@ -246,6 +247,7 @@
                             'X-CSRF-TOKEN': this.csrfToken
                         }
                     }).then(response => {
+                        Notiflix.Loading.remove()
                         Notiflix.Report.success(
                             'success',
                             response.data.message,
@@ -255,6 +257,7 @@
                             }
                         )
                     }).catch(error => {
+                        Notiflix.Loading.remove()
                         Notiflix.Report.failure(
                             'Fail',
                             'upload fail',
