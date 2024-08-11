@@ -10,8 +10,13 @@
                 <div class="rounded-full text-white text-center">HOME</div>
             </a>
         </div>
-        <div class="flex">
-
+        <div class="flex text-white gap-4 pe-5">
+            <button class="text-2xl cursor-pointer" data-modal-target="join-modal" data-modal-toggle="join-modal">
+                <i class="fa-solid fa-users-line"></i>
+            </button>
+            <button  class="text-2xl cursor-pointer" data-modal-target="create-modal" data-modal-toggle="create-modal">
+                <i class="fa-solid fa-circle-plus"></i>
+            </button >
         </div>
     </div>
     <div class="chat-grid flex-grow grid grid-cols-5 gap-1 w-full">
@@ -80,6 +85,69 @@
         </div>
     </div>
 </div>
+<!-- begin::create modal -->
+<div id="create-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <form class="relative bg-white rounded-lg shadow dark:bg-gray-700" @submit.prevent="createGroup" ref="createGroup">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Create Group
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="create-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-4">
+                <input type="text" :value="userId" name="create_id" class="hidden">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="small_size">Group profile</label>
+                <input class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="small_size" name="picture_file" type="file">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="group_name">Group name</label>
+                <input class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none" id="group_name" name="group_name" type="text">
+
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create</button>
+                <button data-modal-hide="create-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Cancle</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- end::create modal -->
+<!-- begin::join group -->
+<div id="join-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Join Community
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="join-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 h-96 grid grid-cols-3 gap-3 overflow-y-scroll">
+                <div class="cursor-pointer h-24" v-for="group in groupList" :key="group.id" @click="joinGroup(group.id)">
+                    <div class="mx-auto w-16 h-16 rounded-full profile" :style="{backgroundImage: 'url(' + chatGroup + '/' + group.picture_file + ')' }"></div>
+                    <p class="text-base text-center">{{ group.group_name }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end::join group -->
 </template>
 <script>
     import moment from 'moment';
