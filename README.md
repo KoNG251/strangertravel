@@ -1,29 +1,22 @@
 # StrangerTravel #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This project is a web application built with Laravel and Vue.js that provides functionalities for hotel booking, group chat, and budget calculation. It allows users to book hotels, participate in group chats, and calculate their expenses effectively.
 
-### What is this repository for? ###
+#Features#
+Hotel Booking: Search for and book hotels.
+Group Chat: Real-time chat functionality for group communication.
+Budget Calculation: Tools to calculate and manage budgets.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+#Technologies Used#
+Backend: Laravel (PHP framework)
+Frontend: Vue.js (JavaScript framework)
+Database: MySQL
+Real-time Communication: Pusher (for chat)
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+#Installation#
+#Prerequisites#
+PHP >= 8.2
+Composer
+Node.js >= 16
+NPM
+MySQL
