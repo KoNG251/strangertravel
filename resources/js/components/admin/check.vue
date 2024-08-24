@@ -222,8 +222,8 @@
 
                 <div class="card card-flush p-10 tab-pane fade" id="room"  role="tabpanel">
                     <div class="d-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                        <div class="col-span-1 p-10 border rounded-md" v-for="room in room" :key="room.id">
-                            <h3>Room number: {{ room.numberOfRoom }} <span class="badge badge-primary">{{ room.room_type }}</span></h3>
+                        <div class="col-span-1 md:col-span-2 p-10 border rounded-md" v-for="room in room" :key="room.id">
+                            <h3>Room categories: {{ room.categories }} </h3>
                             <div class="flex gap-2 text-base mb-2 font-medium text-main">
                                 <i class="fi fi-rr-money-bill-wave"></i>
                                 <p>{{ room.price.toLocaleString() }} bath</p>
@@ -234,7 +234,10 @@
                             </div>
                             <div class="flex gap-2 text-base mb-2 font-medium text-main">
                                 <i class="fi fi-rr-user"></i>
-                                <p>{{ sumPeople(room.numberOfBed,room.bed_type) }} people</p>
+                                <p>{{ sumPeople(room.numberOfBed,room.bedCategories) }} people</p>
+                            </div>
+                            <div class="flex gap-2 text-base mb-2 font-medium text-main">
+                                <p>quantity room : {{ room.count }} </p>
                             </div>
                         </div>
                     </div>
@@ -344,9 +347,10 @@
                         this.hotel.near = JSON.parse(this.hotel.near)
                         this.room = JSON.stringify(response.data.message.room)
                         this.room = JSON.parse(this.room)
-                    }).catch(error => {
-                        window.location.href = error.response.data.url
                     })
+                    // .catch(error => {
+                    //     window.location.href = error.response.data.url
+                    // })
 
                 },
                 sumPeople(value,bed){

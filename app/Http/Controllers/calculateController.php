@@ -73,7 +73,7 @@ class calculateController extends Controller
             $query->select(DB::raw(1))
                 ->from('rooms')
                 ->whereColumn('rooms.hotelId', 'hotels.id')
-                ->whereRaw('rooms.numberOfBed * rooms.bed_type >= ?',[$totalPeople]);
+                ->whereRaw('rooms.numberOfBed * rooms.bedCategories >= ?',[$totalPeople]);
         })
         ->groupBy('hotels.id', 'hotels.hotelName', 'hotels.province')
         ->get();

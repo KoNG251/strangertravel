@@ -25,23 +25,23 @@ class viewController extends Controller
             $start = $request->input('start');
             $end = $request->input('end');
             $rooms = Room::query()
-            ->select('id', 'numberOfRoom', 'room_type', 'price', 'numberOfBed', 'bed_type', DB::raw('COUNT(*) as count_room'))
+            ->select('id', 'categories', 'price', 'numberOfBed', 'bedCategories', DB::raw('COUNT(*) as count_room'))
             ->where('hotelId', $id)
             ->whereDoesntHave('bookings', function ($query) use ($start, $end) {
                 $query->where('check_in', '<', $end)
                     ->where('check_out', '>', $start);
             })
-            ->groupBy('id', 'numberOfRoom', 'room_type', 'price', 'numberOfBed', 'bed_type')
+            ->groupBy('id', 'categories', 'price', 'numberOfBed', 'bedCategories')
             ->get();
         }else{
             $rooms = Room::query()
-            ->select('id', 'numberOfRoom', 'room_type', 'price', 'numberOfBed', 'bed_type', DB::raw('COUNT(*) as count_room'))
+            ->select('id', 'categories', 'price', 'numberOfBed', 'bedCategories', DB::raw('COUNT(*) as count_room'))
             ->where('hotelId', $id)
             ->whereDoesntHave('bookings', function ($query) {
                 $query->where('check_in', '<', today()->addDay())
                     ->where('check_out', '>', today());
             })
-            ->groupBy('id', 'numberOfRoom', 'room_type', 'price', 'numberOfBed', 'bed_type')
+            ->groupBy('id', 'categories', 'price', 'numberOfBed', 'bedCategories')
             ->get();
         }
 

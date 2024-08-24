@@ -44,14 +44,14 @@ class dashboardManageController extends Controller
         ->selectRaw('DATE(transactions.created_at) as date, SUM(transactions.price) as total_price')
         ->get();
 
-        $checkInToday = Hotel::select('bookings.*','rooms.numberOfRoom as room')
+        $checkInToday = Hotel::select('bookings.*')
         ->join('rooms','rooms.hotelId','=','hotels.id')
         ->join('bookings','bookings.roomId','=','rooms.id')
         ->where('hotels.createId', '=', $auth)
         ->whereDate('bookings.check_in', '=', date('Y-m-d'))
         ->get();
 
-        $checkOutToday = Hotel::select('bookings.*','rooms.numberOfRoom as room')
+        $checkOutToday = Hotel::select('bookings.*')
         ->join('rooms','rooms.hotelId','=','hotels.id')
         ->join('bookings','bookings.roomId','=','rooms.id')
         ->where('hotels.createId', '=', $auth)

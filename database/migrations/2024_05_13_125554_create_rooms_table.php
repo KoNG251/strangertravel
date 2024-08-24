@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('hotelId');
-            $table->string('numberOfRoom');
-            $table->string('room_type',155);
+            $table->string('categories');
             $table->unsignedInteger('price');
             $table->unsignedInteger('numberOfBed');
-            $table->string('bed_type',50);
+            $table->string('bedCategories',50);
             $table->timestamps();
         });
     }

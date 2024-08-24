@@ -511,6 +511,7 @@ export default {
     watch: {},
     computed: {},
     async mounted() {
+        Notiflix.Loading.hourglass('please wait...');
         await axios.get("/manager/api/get/info").then((response) => {
             this.user = response.data.message;
         });
@@ -528,7 +529,8 @@ export default {
             });
 
             this.renderDonutChart();
-
+        
+        Notiflix.Loading.remove();
     },
 };
 </script>

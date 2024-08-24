@@ -17,7 +17,8 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('reservations:delete-old')->everyMinute();
+        $schedule->command('command:delete')->everyMinute();
+        $schedule->command('command:remind')->everyThreeMinutes();
     }
 
     /**

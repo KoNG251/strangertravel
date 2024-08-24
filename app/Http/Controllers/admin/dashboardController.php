@@ -118,7 +118,11 @@ class dashboardController extends Controller
 
         $image = Photo::where('hotel',$id)->get();
 
-        $rooms = Room::where('hotelId',$id)->orderBy('numberOfRoom')->get();
+        $rooms = Room::select('categories', 'price', 'bedCategories','numberOfBed', DB::raw('count(*) as count'))
+        ->where('hotelId', $id)
+        ->groupBy('categories', 'price', 'bedCategories','numberOfBed')
+        ->orderBy('categories')
+        ->get();
 
         foreach ($rooms as $room) {
             $room->facilities = json_decode($room->facilities);

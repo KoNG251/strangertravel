@@ -291,16 +291,14 @@
                         <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="rounded-lg shadow-xl w-full p-10" v-for="(room,index) in room" :key="index" style="height: 250px">
                                 <div class="flex gap-4 justify-end w-full">
-                                    <div class="text-red-500 cursor-pointer fs-2x" @click="deleteRoom(room.id)">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </div>
-                                    <a :href="updateRoomRoute+'?id='+room.id+'&hotel='+hotel.id" class="fs-2x">
+                                    <a :href="updateRoomRoute+'?categories='+room.categories+'&hotel='+hotel.id" class="fs-2x">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                 </div>
-                                <h3 class="text-bold mb-7">Room number : {{ room.numberOfRoom }}</h3>
+                                <h3 class="text-bold mb-7">Room Categories : {{ room.categories }}</h3>
                                 <h5 class="text-base mb-7"><i class="fa-solid fa-coins"></i> Price : {{ room.price }}</h5>
                                 <h5 class="text-base mb-7"><i class="fa-solid fa-bed"></i> Number of bed : {{ room.numberOfBed }}</h5>
+                                <h5 class="text-base mb-7"><i class="fa-solid fa-bed"></i> Quantity room : {{ room.count }}</h5>
                             </div>
                         </form>
                     </div>
@@ -443,9 +441,10 @@
                         this.hotel.near = JSON.parse(this.hotel.near)
                         this.hotel.facilities = JSON.parse(this.hotel.facilities)
                         this.room = response.data.message.room
-                    }).catch(error => {
-                        window.location.href = error.response.data.url
                     })
+                    // .catch(error => {
+                    //     window.location.href = error.response.data.url
+                    // })
 
                 },
                 pushArray(){

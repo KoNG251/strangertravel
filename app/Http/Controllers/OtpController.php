@@ -79,7 +79,7 @@ class OtpController extends Controller
             $profile->otp_verify = "1";
             $profile->save();
             Alert::success('success','ทำการยืนยัน email เสร็จสิ้น');
-            return redirect()->route('auth.authentication');
+            return redirect()->route('index');
         }else{
             Alert::error('ผิดพลาด','กรุณากรอก OTP ใหม่');
             return view('auth.phoneVerify');

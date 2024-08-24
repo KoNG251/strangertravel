@@ -112,10 +112,7 @@
                         Notiflix.Report.failure(
                             'Notiflix Success',
                              error.response.data.message,
-                            'Okay',
-                            () => {
-
-                            }
+                            'Okay'
                         );
                     })
                 }

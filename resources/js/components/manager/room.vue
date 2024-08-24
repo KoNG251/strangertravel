@@ -160,14 +160,8 @@
                         <div class="row fv-row">
                             <div class="col-xl-12 mb-7">
                                 <div class="form-floating">
-                                    <input class="form-control" type="text" v-model="room.numberOfRoom" :id="'numberOfRoom'+index"/>
-                                    <label :for="'numberOfRoom'+index">Number of room</label>
-                                </div>
-                            </div>
-                            <div class="col-xl-12 mb-7">
-                                <div class="form-floating">
                                     <input class="form-control" type="text" v-model="room.type" :id="'type'+index"/>
-                                    <label :for="'type'+index">Room type</label>
+                                    <label :for="'type'+index">Room categories</label>
                                 </div>
                             </div>
                             <div class="col-xl-6 mb-7">
@@ -190,6 +184,12 @@
                                         <option value="" selected hidden>bed type</option>
                                     </select>
                                     <label :for="'bedType'+index">Bed type</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 mb-7">
+                                <div class="form-floating">
+                                    <input class="form-control" type="number" v-model="room.quantity" :id="'quantity'+index"/>
+                                    <label :for="'quantity'+index">room quantity</label>
                                 </div>
                             </div>
                         </div>
@@ -226,7 +226,7 @@
                     id: null,
                     rooms: [
                         {
-                            numberOfRoom: '',
+                            quantity: 0,
                             type: '',
                             price: '',
                             numberOfBed: '',
@@ -270,7 +270,7 @@
                 },
                 addRoom(){
                     this.rooms.push({
-                        numberOfRoom: '',
+                        quantity: 0,
                         type: '',
                         price: '',
                         numberOfBed: '',
@@ -310,6 +310,7 @@
 
                     }).catch(error => {
                         Notiflix.Loading.remove()
+                        console.log(error.response.data)
                     })
                 },
 

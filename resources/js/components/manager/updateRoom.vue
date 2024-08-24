@@ -190,17 +190,9 @@
                         </div>
                         <form ref="updateForm" @submit.prevent="submitForm">
                             <div class="row fv-row mb-7">
-                                <div class="col-xl-12">
+                                <div class="col-xl-6 mb-7">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" name="numberOfRoom" :value="room.numberOfRoom"  id="number"/>
-                                        <label for="number">Number of room</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row fv-row mb-7">
-                                <div class="col-xl-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" :value="room.room_type" name="room_type" id="type"/>
+                                        <input type="text" class="form-control" :value="room.categories" name="categories" id="type"/>
                                         <label for="type">Room type</label>
                                     </div>
                                 </div>
@@ -212,7 +204,7 @@
                                 </div>
                             </div>
                             <div class="row fv-row mb-7">
-                                <div class="col-xl-6">
+                                <div class="col-xl-6 mb-7">
                                     <div class="form-floating">
                                         <input type="num" class="form-control" name="numberOfBed" :value="room.numberOfBed" id="numberOfBed"/>
                                         <label for="numberOfBed">Number of bed</label>
@@ -220,10 +212,10 @@
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="form-floating">
-                                        <select class="form-select" id="bedType" name="bed_type" :value="room.bed_type" aria-label="Floating label select example">
+                                        <select class="form-select" id="bedType" name="bedCategories" :value="room.bedCategories" aria-label="Floating label select example">
                                             <option value="1">single bed</option>
                                             <option value="2">extra-large double bed</option>
-                                            <option value="1" selected hidden v-if="room.bed_type == 1">single bed (selected)</option>
+                                            <option value="1" selected hidden v-if="room.bedCategories == 1">single bed (selected)</option>
                                             <option value="2" selected hidden v-else>extra-large double bed (selected)</option>
                                         </select>
                                         <label for="bedType">Bed type</label>
@@ -294,7 +286,7 @@
                         email: ''
                     },
                     room: {
-                        numberOfRoom: '',
+                        quantity: '',
                         room_type: '',
                         price: '',
                         numberOfBed: '',
@@ -344,9 +336,10 @@
                 getRoom(){
                     const queryString = window.location.search;
                     const urlParams = new URLSearchParams(queryString);
-                    const id = urlParams.get('id')
+                    const id = urlParams.get('hotel')
+                    const categorie = urlParams.get('categories')
 
-                    axios.get('/manager/api/get/info/room?id='+id).then(response => {
+                    axios.get(`/manager/api/get/info/room?id=${id}&categories=${categorie}`).then(response => {
                         this.room = response.data.message[0]
                     })
 
@@ -356,7 +349,8 @@
 
                     const queryString = window.location.search;
                     const urlParams = new URLSearchParams(queryString);
-                    const id = urlParams.get('id')
+                    const id = urlParams.get('hotel')
+                    const categorie = urlParams.get('categories')
 
                     const data = {};
                     formData.forEach((value, key) => {
@@ -368,7 +362,7 @@
                         {
                             data: data,
                             id: id,
-                            facilities: this.room.facilities.facilitie
+                            categories: categorie,
                         },
                         {
                             headers: {
@@ -377,6 +371,7 @@
                             }
                         }
                     ).then(response =>{
+                        
                         Notiflix.Report.success(
                             'success',
                             'update success',
@@ -385,8 +380,6 @@
                                 window.location = `${this.hotelRoute}?id=${this.hotelId}`
                             }
                         )
-                    }).catch(error =>{
-
                     })
 
                 }

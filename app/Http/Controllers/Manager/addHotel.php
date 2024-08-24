@@ -134,7 +134,7 @@ class addHotel extends Controller
     public function storeRoom(Request $request) {
 
         $validatedData = $request->validate([
-            'room.*.numberOfRoom' => 'required',
+            'room.*.quantity' => 'required',
             'room.*.type' => 'required',
             'room.*.price' => 'required',
             'room.*.numberOfBed' => 'required',
@@ -144,14 +144,15 @@ class addHotel extends Controller
         $id = $request->input('id');
 
         foreach ( $validatedData['room'] as $room){
-            Room::create([
-                'hotelId' => $id ,
-                'numberOfRoom' => $room['numberOfRoom'],
-                'room_type' => $room['type'],
-                'price' => $room['price'],
-                'numberOfBed' => $room['numberOfBed'],
-                'bed_type' => $room['bedType']
-            ]);
+            for($i = 1; $i<=$room['quantity']; $i++){
+                Room::create([
+                    'hotelId' => $id ,
+                    'categories' => $room['type'],
+                    'price' => $room['price'],
+                    'numberOfBed' => $room['numberOfBed'],
+                    'bedCategories' => $room['bedType']
+                ]);
+            }
         }
 
         return response()->json([
@@ -192,18 +193,22 @@ class addHotel extends Controller
 
         $data = $request->input('data');
         $id = $request->input('id');
+        $categories = $request->input('categories');
+        
+        $update = Room::where('hotelId',$id)
+        ->where('categories',$categories)
+        ->update([
+            'categories'=>$data['categories'],
+            'price'=>$data['price'],
+            'numberOfBed' => $data['numberOfBed'],
+            'bedCategories' => $data['bedCategories']
+        ]);
 
-        $room = Room::find($id);
-        $room->numberOfRoom = $data['numberOfRoom'];
-        $room->room_type = $data['room_type'];
-        $room->price = $data['price'];
-        $room->numberOfBed = $data['numberOfBed'];
-        $room->bed_type = $data['bed_type'];
-        $room->save();
-
-        return response()->json([
-            "message" => 'success'
-        ],200);
+        if($update){
+            return response()->json([
+                "message" => 'update successfully!!'
+            ],200);
+        }
 
     }
 

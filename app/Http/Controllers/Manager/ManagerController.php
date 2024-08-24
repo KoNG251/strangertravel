@@ -205,7 +205,11 @@ class ManagerController extends Controller
 
         $image = Photo::where('hotel',$id)->get();
 
-        $rooms = Room::where('hotelId',$id)->orderBy('numberOfRoom')->get();
+        $rooms = Room::select('categories', 'price', 'bedCategories','numberOfBed', DB::raw('count(*) as count'))
+        ->where('hotelId', $id)
+        ->groupBy('categories', 'price', 'bedCategories','numberOfBed')
+        ->orderBy('categories')
+        ->get();
 
         return response()->json([
             'message' => [
@@ -220,12 +224,13 @@ class ManagerController extends Controller
     public function getInfoRoom(Request $request) {
 
         $id = $request->input('id');
+        $categories = $request->input('categories');
 
-        $rooms = Room::where('id','=',$id)->get();
-
-        foreach ($rooms as $room) {
-            $room->facilities = json_decode($room->facilities);
-        }
+        $rooms = Room::select('categories', 'price', 'bedCategories','numberOfBed', DB::raw('count(*) as count'))
+        ->where('hotelId','=',$id)
+        ->where('categories',$categories)
+        ->groupBy('categories', 'price', 'bedCategories','numberOfBed')
+        ->get();
 
         return response()->json([
             'message' => $rooms

@@ -88,7 +88,7 @@
             <div class="rounded-lg border-tab grid grid-cols-1 md:grid-cols-4 gap-4 relative" style="z-index:1;">
                 <!-- box loop -->
                 <label :for="'room'+item.id" :class="['shadow-lg rounded-lg p-4 border border-gray-400', { 'ring-4 ring-blue-500': selectedRooms.includes(item.id) }]"  v-for="item in room" :key="item.id">
-                    <h4 class="mb-2 text-xl font-bold">Room number: {{ item.numberOfRoom }} <span class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{item.room_type}}</span></h4>
+                    <span class="bg-blue-400 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">categories: {{ item.categories }}</span>
                     <div class="flex gap-2 text-base mb-2 font-medium text-main">
                         <i class="fi fi-rr-money-bill-wave"></i>
                         <p>{{ item.price.toLocaleString() }} bath</p>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="flex gap-2 text-base mb-2 font-medium text-main">
                         <i class="fi fi-rr-user"></i>
-                        <p>{{ sumPeople(item.numberOfBed,item.bed_type) }} people</p>
+                        <p>{{ sumPeople(item.numberOfBed,item.bedCategories) }} people</p>
                     </div>
                     <input type="checkbox" :value="item.id" :id="'room'+item.id" class="hidden" name="hotel" @change="toggleSelection(item.id)">
                 </label>

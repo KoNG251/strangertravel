@@ -3,6 +3,7 @@ const tailwindcss = require('tailwindcss');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 mix.js('resources/js/app.js', 'public/js')
+   .vue() 
    .postCss('resources/css/app.css', 'public/css', [
        tailwindcss('./tailwind.config.js'),
    ]);

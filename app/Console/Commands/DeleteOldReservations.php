@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\booking;
+use App\Models\Booking;
 use Carbon\Carbon;
 
 class DeleteOldReservations extends Command
@@ -13,7 +13,7 @@ class DeleteOldReservations extends Command
      *
      * @var string
      */
-    protected $signature = 'reservations:delete-old';
+    protected $signature = 'command:delete';
 
     /**
      * The console command description.
@@ -27,12 +27,12 @@ class DeleteOldReservations extends Command
      */
     public function handle()
     {
-        $threshold = Carbon::now()->subHours(3);
+        $threshold = Carbon::now()->subMinutes(5);
 
-        // Delete the old reservations with status 0
-        booking::where('status', 0)
+        $book = Booking::where('status', 0)
                    ->where('created_at', '<', $threshold)
                    ->delete();
+        
         
         $this->info('Old reservations deleted successfully.');
     }

@@ -11,12 +11,12 @@ class Room extends Model
 
     protected $fillable = [
         'hotelId',
-        'numberOfRoom',
+        'categories',
         'room_type',
         'price',
         'facilities',
         'numberOfBed',
-        'bed_type'
+        'bedCategories'
     ];
 
     public function bookings()

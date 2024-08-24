@@ -160,9 +160,10 @@ export default {
                     }).catch(error => {
 
                         Notiflix.Loading.remove();
+                        console.log(error.response)
                         Notiflix.Report.failure(
                             'Failure',
-                            'do not pay as the same booking',
+                            error.response.data.message,
                             'Okay',
                             () => {
                                 window.location.href = '/'
